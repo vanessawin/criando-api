@@ -20,7 +20,7 @@ esse comando cria um arquivo chamado package.json, ele nada mais é que um arqui
 ```
 
 * Vamos utilizar o  express.js  framwork, que nos ajuda a construir api no padrao rest(usando protocolo http) . O Express é um framework para aplicativo da web do Node.js mínimo e flexível que fornece um conjunto robusto de recursos para aplicativos web e móvel.
-para saber mais  sobre express.js[express.js]( https://expressjs.com/pt-br/)  
+para saber mais  sobre [express.js]( https://expressjs.com/pt-br/)  
 * Para usar o express vamos digitar no terminal o comando ``` npm install express --save```  todos os modulos que intalar vai aparecer o uma pasta chamada node-modules, outro arquivo chamado package-lockson na pasta raiz.
 
 
@@ -64,6 +64,6 @@ que vai aparecer isso no terminal
 [nodemon] starting `node app.js`
 A api esta rodando em  http://localhost:3000
 ```
-Agora sim... Qualquer coisa no codigo que mudar, essa aplicação vai parar e vai subir 
+Agora sim... Qualquer coisa no codigo que mudar, essa aplicação vai parar e vai subir automaticament 
 
 
