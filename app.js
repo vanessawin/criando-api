@@ -21,8 +21,23 @@ app.post('/notes', (req, res) => {
   const title = req.body.title 
   const description = req.body.description 
 
+  // Validando o campo title
+  // Verificar se o campo title não estiver preenchido 
+  if(!title) return res.status(400).json({ mensage: "Informe o campo title"})
+
+  // Validando o campo description
+  // Verificar se o campo description não estiver preenchido 
+  if(!description) return res.status(400).json({ mensage: "Informe o campo description"})
   
-  res.json(notes) 
+  //Inserindo as informações dentro do notes
+  notes.push({title,description}) // como o campo e o valor tem o mesmo nome só precisamos colocar o mesmo nome
+  
+  // //caso contrario seria assim 
+  // notes.push({
+  //   title: title,
+  //   description: description
+  // })
+  res.json({ menssage: "Anotação salva com sucesso!"}) 
 })
 
 app.listen(port, () => {

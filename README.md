@@ -157,3 +157,93 @@ app.post('/notes', (req, res) => {
 })
 
 ```
+* Validando o campo title, vamos verificar se o campo title esta ou não preenchido
+ copie esse código 
+ ```if(!title) return res.status(400).json({ mensage: "Informe o campo title"})``` 
+Se não estiver preenchido vamos enviar uma mensagem de erro. Para saber mais informações [express](http://expressjs.com/pt-br/api.html#res.status)
+
+Exemplo:
+
+```
+app.post('/notes', (req, res) => { 
+  const title = req.body.title 
+  const description = req.body.description 
+
+  if(!title) return res.status(400).json({ mensage: "Informe o campo title"}) 
+
+  res.json(notes) 
+})
+
+```
+Obs: O return faz com que se o title não estiver preenchido, ele para e retorna  a mensagem sem precisar continuar o código que esta abaixo.
+
+* Validando o campo description, vamos verificar se o campo description esta ou não preenchido
+ copie esse código 
+ ``` if(!description) return res.status(400).json({ mensage: "Informe o campo description"}) ```
+Se não estiver preenchido vamos enviar uma mensagem de erro. Para saber mais informações [express](http://expressjs.com/pt-br/api.html#res.status)
+
+Exemplo:
+
+```
+ app.post('/notes', (req, res) => { 
+  const title = req.body.title 
+  const description = req.body.description 
+
+  if(!title) return res.status(400).json({ mensage: "Informe o campo title"})
+
+  if(!description) return res.status(400).json({ mensage: "Informe o campo description"})
+
+  
+
+  res.json(notes) 
+})
+
+```
+
+* Agora se os campos title e description estiverem preenchidos precisamos inserir ele no nosso array const notes = [],  para fazer issso vamos adicionar esse código ```   notes.push({title,description}) ```
+
+Exemplo: 
+
+```
+ app.post('/notes', (req, res) => { 
+  const title = req.body.title 
+  const description = req.body.description 
+
+  if(!title) return res.status(400).json({ mensage: "Informe o campo title"})
+
+  if(!description) return res.status(400).json({ mensage: "Informe o campo description"})
+
+  notes.push({title,description})
+
+  res.json(notes) 
+})
+
+Obs: Como o campo e o valor tem o mesmo nome só precisamos colocar o mesmo nome. Caso contrario seria assim 
+  notes.push({  
+    title: titulo,
+    description: descricao
+ })
+ 
+```
+
+* Toda vez que salvamos não precisamos devolver todas as notas ```res.json(notes)``` para isso só vamos devolver uma mensagem ```res.json({ menssage: "Anotação salva com sucesso!"}) ```
+
+Exemplo: 
+
+```
+ app.post('/notes', (req, res) => { 
+  const title = req.body.title 
+  const description = req.body.description 
+
+  if(!title) return res.status(400).json({ mensage: "Informe o campo title"})
+
+  if(!description) return res.status(400).json({ mensage: "Informe o campo description"})
+
+  notes.push({title,description})
+
+ res.json({ menssage: "Anotação salva com sucesso!"}) 
+})
+
+```
+
+Prontinho... Nosso metodo Post esta criado!!!
