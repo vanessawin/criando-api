@@ -69,7 +69,7 @@ Agora sim... Qualquer coisa no codigo que mudar, essa aplicação vai parar e va
 
 ### Depois de tudo instalado agora vamos construir nossa api/nossas rotas
 
-##### Vamos utilizar os métodos [Http](https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Methods)
+##### Vamos utilizar alguns métodos [Http](https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Methods)
 
 Como não vamos utilizar o banco de dados
 *Dentro do arquivo app.js, depois do ``` const port = 3000 ```de um enter e crie uma variável  chamada rotes que recebe um array vazio 
@@ -83,10 +83,9 @@ const app = express()
 const port = 3000
 
 const notes = []
-
-###Iniciando o método Get
-
 ```
+### Iniciando o método Get
+
 * Adicione depois da / notes na rota
 
 Exemplo:
@@ -105,3 +104,56 @@ Exemplo:
 })
 
  ```
+
+ ### Iniciando o método Post 
+
+Ele serve para criar alguma coisa nova
+
+* Copie o código 
+
+``` 
+app.get('/notes', (req, res) => { 
+  res.json(notes)  
+})
+
+```
+
+* Como nós vamos trabalhar com o body temos que colocar mais um item lá em cima esse código ``` app.use(express.json()) ```  depois desse ``` const port = 3000 ```
+isso vai passar uma configuração para o express, para parsear todas as minhas entradas das apis por json. Para saber mais consulte [express](http://expressjs.com/pt-br/4x/api.html#req.body)
+
+Exemplo: 
+
+```
+const express = require('express')
+const app = express()
+const port = 3000
+
+app.use(express.json()) 
+``` 
+
+* Para pegar as variaveis que o front esta mandando vamos add ``` console.log(req.body) ``` e faça o teste 
+
+Exemplo:
+
+```
+app.post('/notes', (req, res) => { 
+  // o req vai pegar as requisições do body assim consigo manipular essas informações
+  console.log(req.body)
+  res.json(notes) 
+})
+```
+
+  Sabendo disso agora  a gente vamos conseguir extrair as informações 
+* Vamos criar dois campos para para passar o titulo e a descrição 
+```const title = req.body.title ``` e  ```const description = req.body.description ```
+
+Exemplo: 
+
+```
+app.post('/notes', (req, res) => { 
+  const title = req.body.title 
+  const description = req.body.description 
+  res.json(notes) 
+})
+
+```
