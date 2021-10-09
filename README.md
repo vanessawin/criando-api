@@ -282,7 +282,8 @@ notes.push({
 
 Para cada registro apareceu um intedificador diferente
 
-`[
+```
+[
   {
     "id": "ce7950d1-6b02-47c4-8c6b-a03948d541c4",
     "title": "Titulo da minha anotação",
