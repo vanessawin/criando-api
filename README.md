@@ -223,7 +223,7 @@ Obs: Como o campo e o valor tem o mesmo nome só precisamos colocar o mesmo nome
     title: titulo,
     description: descricao
  })
- 
+
 ```
 
 * Toda vez que salvamos não precisamos devolver todas as notas ```res.json(notes)``` para isso só vamos devolver uma mensagem ```res.json({ menssage: "Anotação salva com sucesso!"}) ```
@@ -245,5 +245,63 @@ Exemplo:
 })
 
 ```
+* Para cada item que inseri  precisamos de um id,
+porque vamos manipular o const notes = [] em algum momento. Então precisamos de um identificador, geralmente que faz isso é o banco de dados, mas como não estamos utilizando um banco de dados aqui então vamos ter que fazer isso em memória 
+
+* Para isso vamos ter que utilizar outro modulo o npm uuid esse modulo permite que gera id unicos, que não corre risco de se repetir. Para saber mais informações [npm uuid](https://www.npmjs.com/package/uuid)
+Para instalar ele , vamos no terminal e dentro da pasta raiz 
+digite esse comando ``` npm install uuid ```
+
+* Depois de instalado vamos importar nosso modulo la no começo colocando esse código ```const { v4: uuidv4 } = require('uuid')  ```
+
+Exemplo: 
+
+```
+const express = require('express')
+const { v4: uuidv4 } = require('uuid')
+
+const app = express()
+const port = 3000
+
+app.use(express.json()) 
+``` 
+* Vamos criar mais um campo no nosso objeto colocando o id e chamando a função copie e cole 
+esse código dentro do objeto ``` id: uuidv4(), ``` para chamar a função do identificador 
+
+Exemplo:
+
+```
+notes.push({
+    id: uuidv4(), 
+    title,
+    description
+  })  
+  
+```
+* Obs: Testei esse codigo no insomnia, se não tiver ele instalado basta acessar o site para o downlad [insomnia](https://insomnia.rest/download)
+
+Para cada registro apareceu um intedificador diferente
+
+`[
+  {
+    "id": "ce7950d1-6b02-47c4-8c6b-a03948d541c4",
+    "title": "Titulo da minha anotação",
+    "description": "Minha descrição teste"
+  },
+  {
+    "id": "89ea7770-16da-4e99-ac4a-7bf4bfda9929",
+    "title": "Titulo da minha anotação",
+    "description": "Minha descrição teste"
+  },
+  {
+    "id": "52aa93f8-bb9f-439a-8829-9f4585510864",
+    "title": "Titulo da minha anotação",
+    "description": "Minha descrição teste"
+  }
+]
+
+```
+Agora para cada registro temos um identificador, e atravéz do identificador vamos poder manipular eles em outra hora!
+
 
 Prontinho... Nosso metodo Post esta criado!!!
