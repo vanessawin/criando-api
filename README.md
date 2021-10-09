@@ -67,3 +67,41 @@ A api esta rodando em  http://localhost:3000
 Agora sim... Qualquer coisa no codigo que mudar, essa aplicação vai parar e vai subir automaticament 
 
 
+### Depois de tudo instalado agora vamos construir nossa api/nossas rotas
+
+##### Vamos utilizar os métodos [Http](https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Methods)
+
+Como não vamos utilizar o banco de dados
+*Dentro do arquivo app.js, depois do ``` const port = 3000 ```de um enter e crie uma variável  chamada rotes que recebe um array vazio 
+```const = notes ```
+
+Exemplo: 
+
+```
+const express = require('express')
+const app = express()
+const port = 3000
+
+const notes = []
+
+###Iniciando o método Get
+
+```
+* Adicione depois da / notes na rota
+
+Exemplo:
+```
+app.get('/notes', (req, res) => 
+
+```
+
+* Alterar o send para json, ao invés de  uma string vamos retornar 
+  para o frontend um tudo que estiver dentro do const note = [], um array
+
+Exemplo:
+  ```
+  app.get('/notes', (req, res) => { 
+  res.json(notes)
+})
+
+ ```

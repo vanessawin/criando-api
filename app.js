@@ -1,11 +1,16 @@
-const express = require('express') //importa aquele modulo que a gente instalou
+const express = require('express')
 const app = express()
-const port = 3000 // qual porta que vai estar rodar nossa api
+const port = 3000
 
-app.get('/', (req, res) => {
-  res.send('Hello World! Hello Vanessa.eiii') // quando eu chamar essa rota ele vai responder no navegador  Hello World! Hello Vanessa
+//como não vamos utilizar banco de dados/ vamos utilizar um banco em memória 
+//criar uma variavel chamada rotes. que recebe um array vazio
+const notes = []
+
+app.get('/notes', (req, res) => { //adicione depois da / notes na rota
+  res.json(notes) // alterar o send para json, ao inves de  uma string eu vou retornar 
+  //para o frontend um tudo que estiver no const note = [], um array
 })
 
-app.listen(port, () => { // fica escutando 
-  console.log(`A api esta rodando em  http://localhost:${port}`)
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}/notes`)
 })
