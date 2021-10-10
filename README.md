@@ -105,7 +105,7 @@ Exemplo:
 
  ```
 
- ### Iniciando o método Post 
+ ### Iniciando o método Post/Criar 
 
 Ele serve para criar alguma coisa nova
 
@@ -264,6 +264,7 @@ const app = express()
 const port = 3000
 
 app.use(express.json()) 
+
 ``` 
 * Vamos criar mais um campo no nosso objeto colocando o id e chamando a função copie e cole 
 esse código dentro do objeto ``` id: uuidv4(), ``` para chamar a função do identificador 
@@ -306,3 +307,185 @@ Agora para cada registro temos um identificador, e atravéz do identificador vam
 
 
 Prontinho... Nosso metodo Post esta criado!!!
+
+### Iniciando o método Put/Editar
+
+O metodo Put  serve para editar informações para  mais informações 
+* Vamos copiar o post e colar ele antes do ``` app.listen(port, () => ```
+* Altere o metodo para put
+
+Exemplo: 
+
+``` 
+app.put('/notes', (req, res) => {        <==== Altere o metodo post para put
+  const title = req.body.title
+  const description = req.body.description
+
+  if (!title) return res.status(400).json({ mensage: "Informe o campo title" })
+
+  if (!description) return res.status(400).json({ mensage: "Informe o campo description" })
+
+  notes.push({
+    id: uuidv4(),
+    title,
+    description
+  }) 
+
+   res.json({ menssage: "Anotação salva com sucesso!" })
+}) // cole até aqui
+
+
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}/notes`)
+})
+
+```
+Quando estamos fazendo um Put precisamos de um campo chamado id,  o usuario 
+tem que informar qual que é o id do item que eu quero editar 
+copie esse código  ```const id = req.body.id ```
+
+Exemplo: 
+
+```
+app.put('/notes', (req, res) => {
+  const id = req.body.id                     <========== e cole aqui
+  const title = req.body.title
+  const description = req.body.description
+
+```
+
+* Agora vamos validar o id, 
+Se o usuário não informar o campo id no front, envie uma mensagem de erro
+
+copie e cole o código abaixo 
+
+```if (!id) return res.status(400).json({ mensage: "Informe o campo id" })```
+
+
+
+Exemplo:
+
+```
+app.put('/notes', (req, res) => {
+  const id = req.body.id
+  const title = req.body.title
+  const description = req.body.description
+
+  if (!id) return res.status(400).json({ mensage: "Informe o campo id" }) <======= cole ele assim
+
+  if (!title) return res.status(400).json({ mensage: "Informe o campo title" })
+
+  if (!description) return res.status(400).json({ mensage: "Informe o campo description" })
+
+```
+
+* Se o usuário passou o id, temos que verificar se ele existe no array que estamos salvando,
+
+  
+ copie e cole esse código  ``` const note = notes.find((n) => n.id === id) ```
+
+ Exemplo: 
+
+```
+ app.put('/notes', (req, res) => {
+  const id = req.body.id
+  const title = req.body.title
+  const description = req.body.description
+
+  if (!id) return res.status(400).json({ mensage: "Informe o campo id" })
+
+  const note = notes.find((n) => n.id === id)               <===== cole assim 
+
+  if (!title) return res.status(400).json({ mensage: "Informe o campo title" })
+
+  if (!description) return res.status(400).json({ mensage: "Informe o campo description" })
+
+```
+
+Obs: Essa função vai procurar  o id dentro do array para fazer a pesquisa
+Se o id for igual, essa função vai retornar o objeto para o note
+
+
+* Vamos validar o note tabém 
+copie e cole o código 
+```if (!note) return res.status(400).json({ mensage: "Nenhuma anotação encontrada para o id informado" } )``
+
+Exemplo:
+
+```
+ app.put('/notes', (req, res) => {
+  const id = req.body.id
+  const title = req.body.title
+  const description = req.body.description
+
+  if (!id) {
+    return res.status(400).json({ mensage: "Informe o campo id" })
+  }
+  const note = notes.find((n) => id === id)  
+
+  if (!note) { 
+    return res.status(400).json({ mensage: "Nenhuma anotação encontrada para o id informado" })                                                      <======= cole assim
+  }
+
+  if (!title) {
+    return res.status(400).json({ mensage: "Informe o campo title" })
+  }
+
+  if (!description) {
+    return res.status(400).json({ mensage: "Informe o campo description" })
+  }
+
+
+Obs: Agora coloquei  {} em cada validação 
+
+```
+* Agora vamos manipular o array
+apague essa parte do código 
+
+```
+notes.push({
+    id: uuidv4(),
+    title,
+    description
+  }) 
+
+``` 
+* Cole esse outro código no lugar
+
+```
+ for(const noteObject of notes){
+      if(noteObject.id === id){
+        noteObject.title = title
+        noteObject.description = description
+      }
+  }
+
+```
+Vou descrever o código acima
+
+Esse for vai salvar toda a informação do array notes dentro do noteObject ```(const noteObject of notes) ```
+Depois vai fazer a condição/comparação  do id ``` if(noteObject.id === id) ```
+Se o id for igual vamos alterar os campos title e description
+
+``` noteObject.title = title ```
+
+``` noteObject.description = description ```
+
+* Vamos mudar a mensagem do  também ``` res.json ```
+
+Exemplo:
+
+```
+ 
+  for(const noteObject of notes){
+      if(noteObject.id === id){ 
+        noteObject.title = title 
+        noteObject.description = description
+      }
+  }
+
+  res.json({ menssage: "Anotação alterada com sucesso!" }) <======== ficara assim
+})
+
+``` 
+Parabés o metodo put foi criado com sucesso!!!
