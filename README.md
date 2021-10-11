@@ -489,3 +489,45 @@ Exemplo:
 
 ``` 
 Parabés o metodo put foi criado com sucesso!!!
+
+
+### Iniciando o método Delete/Excluir
+
+Ja criamos o método Get, Post e Put agora precisamos criar o método delete para excluir no um ojeto do array...
+
+* Copie o ultimo metódo e exclua algumas coisas nele, altere o metodo para delete e tbm a mensagem de erro
+
+veja no exemplo abaixo como vai ficar 
+
+```
+app.delete('/notes', (req, res) => {              <====== altere para o metodo delete
+  const id = req.body.id
+
+  if (!id) {                                      <======Pesquisar se o campo id esta certo
+     return res.status(400).json({ mensage: "Informe o campo id" })
+  }
+
+  const note = notes.find((n) => n.id === id)    <=== pesquisar pelo id
+  if (!note) {                                   <=== se não encontrar o id retorne a mensagem
+    return res.status(400).json({ mensage: "Nenhuma anotação encontrada para o id informado" })
+  }
+  
+  res.json({ menssage: "Anotação excluida com sucesso!" })
+})
+
+```
+
+Obs: Do lado do código tem uma setinha  para lembrar quais funções que alguns comando faz!
+
+* Agora vamos criar a função para apagar 
+copie e cole esse código
+``` 
+for (const index in notes){   <=== pegar todos os id de notes e salvar na variavel
+    if(notes[index].id === id){ comparando id
+      notes.splice(index, 1)     <====== excluindo o id
+    }
+  }
+```
+
+
+Prontinho.... método delete criado

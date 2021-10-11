@@ -17,6 +17,22 @@ app.get('/notes', (req, res) => { //adicione depois da / notes na rota
   //para o frontend um tudo que estiver no const note = [], um array
 })
 
+app.get('/notes/:id', (req, res) => {
+  const id = req.params.id
+
+  if (!id) {
+    return res.status(400).json({ mensage: "Informe o campo id" })
+  }
+  const note = notes.find((n) => n.id === id)
+
+  if (!note) {
+    return res.status(400).json({ mensage: "Nenhuma anotação encontrada para o id informado" })
+  }
+
+
+  res.json(note.title)
+})
+
 // Metodo Post
 //Altere o metodo get para Post
 app.post('/notes', (req, res) => {
@@ -53,13 +69,13 @@ app.put('/notes', (req, res) => {
   const description = req.body.description
 
   if (!id) {
-     return res.status(400).json({ mensage: "Informe o campo id" })
+    return res.status(400).json({ mensage: "Informe o campo id" })
   }
 
   // Se o usuário passou o id, temos que verificar se ele existe no array que estamos salvando
   // Procurar alguma coisa dentro do array, passo uma função para fazer a pesquisa
   // Se o id for igual, essa função vai retornar o objeto para o note
-  
+
   const note = notes.find((n) => n.id === id)
 
   // Se o id não existir, envie uma mensagem
@@ -73,14 +89,34 @@ app.put('/notes', (req, res) => {
     return res.status(400).json({ mensage: "Informe o campo description" })
   }
   // Manipulando o array notes
-  for(const noteObject of notes){
-      if(noteObject.id === id){ //se o id do obj for igual ao que foi informado
-        noteObject.title = title //altera o title que foi passado como parametro
-        noteObject.description = description //altera a description que foi passado como parametro
-      }
+  for (const noteObject of notes) {
+    if (noteObject.id === id) { //se o id do obj for igual ao que foi informado
+      noteObject.title = title //altera o title que foi passado como parametro
+      noteObject.description = description //altera a description que foi passado como parametro
+    }
   }
 
   res.json({ menssage: "Anotação alterada com sucesso!" })
+})
+
+// Método Delete
+app.delete('/notes', (req, res) => {
+  const id = req.body.id
+
+  if (!id) {
+    return res.status(400).json({ mensage: "Informe o campo id" })
+  }
+
+  const note = notes.find((n) => n.id === id)
+  if (!note) {
+    return res.status(400).json({ mensage: "Nenhuma anotação encontrada para o id informado" })
+  }
+  for (const index in notes) {
+    if (notes[index].id === id) {
+      notes.splice(index, 1)
+    }
+  }
+  res.json({ menssage: "Anotação excluida com sucesso!" })
 })
 
 app.listen(port, () => {
