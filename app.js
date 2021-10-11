@@ -5,6 +5,8 @@ const app = express()
 app.use(express.json()) // passando uma configuração para o express, 
 //para parsear todas as minhas entradas das apis para json
 app.use(cors()) // configurando
+
+app.use(express.static('www'))
 const port = 3000
 
 //como não vamos utilizar banco de dados/ vamos utilizar um banco em memória 
@@ -121,6 +123,6 @@ app.delete('/notes', (req, res) => {
 })
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}/notes`)
+  console.log(`Example app listening at http://localhost:${port}`)
 })
 
