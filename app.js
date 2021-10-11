@@ -1,9 +1,10 @@
 const express = require('express')
 const { v4: uuidv4 } = require('uuid') //importando o modulo para gerar o id
-
+const cors = require('cors') //importando 
 const app = express()
 app.use(express.json()) // passando uma configuração para o express, 
 //para parsear todas as minhas entradas das apis para json
+app.use(cors()) // configurando
 const port = 3000
 
 //como não vamos utilizar banco de dados/ vamos utilizar um banco em memória 
