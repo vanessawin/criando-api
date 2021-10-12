@@ -6,7 +6,7 @@ function salvar() {    // função  para o botão salvar
     if (!titulo) return alert("Preencha o campo Título")
     if (!descricao) return alert("Preencha o campo Descrição")
 
-    // enviando o metodo post para o backend
+    // enviando o metodo post/criar para o backend
     $.ajax({
         type: 'post',
         url: '/notes', // rota que criamos no backend 
@@ -26,7 +26,27 @@ function salvar() {    // função  para o botão salvar
     })
 
 }
-// metodo get
+function excluir(id) {    // função  para o botão salvar
+    
+    $.ajax({
+        type: 'delete',
+        url: '/notes', // rota que criamos no backend 
+        data: JSON.stringify({ id: id }), //é o json que vou enviar para o backend
+        contentType: "application/json; charset=utf-8",
+
+        //retorno de sucesso ou errro vinda do backend
+        success: function (data) {
+            alert(data.menssage) // esse retorno de msgem é vinda do backend
+            listar() // função toda vez que limpar os campos, esse listar vai mostrar todos os itens
+        },
+        error: function (res) {
+            alert(res.responseJSON.mensage) // esse retorno de msgem é vinda do backend
+        }
+    })
+
+}
+
+// metodo get/listar
 function listar() {
     $(".list").html("") // antes de inserir algo na lista, limpe a listagem do html 
     // para nâo duplicar, para receber a listagem que vem da api
@@ -47,8 +67,8 @@ function listar() {
                 <div class="item">
                     <h2>${note.title}</h2>
                     <p>${note.description}</p>
-                    <a href="">Editar</a>
-                    <a href="">Excluir</a>
+                    <button onclick="excluir('${note.id}')">Excluir</button>
+                    
                 </div>
                 
                 `)
@@ -59,4 +79,28 @@ function listar() {
         }
     })
 }
+
 listar() //se dar f5  vai aparecer tudo que ja estava na api, por isso que chamei a função fora
+
+
+// metodo delete/excluir
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
