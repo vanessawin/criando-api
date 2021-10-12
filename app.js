@@ -31,9 +31,7 @@ app.get('/notes/:id', (req, res) => {
   if (!note) {
     return res.status(400).json({ mensage: "Nenhuma anotação encontrada para o id informado" })
   }
-
-
-  res.json(note.title)
+  res.json(note)
 })
 
 // Metodo Post

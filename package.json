@@ -1,7 +1,7 @@
 {
   "name": "crud-api-anotacao",
   "version": "1.0.0",
-  "description": "",
+  "description": "* Tenha o git instalado em sua maquina\r * Tenha o node intalado em sua maquina",
   "main": "index.js",
   "scripts": {
     "start": "nodemon app.js",

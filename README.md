@@ -1,7 +1,13 @@
 # criando-api
+Descrição 
+Do Back ao Front
+Um crud de anotação ende teremos dois campos um titulo e outro descrição, 
+onde criamos o front e o back, e chamamos o back através de jquery/ajax: 
+onde utilizamos os métodos get/listar, post/criar. put/editar. delete/excluir 
+Ficou Bonitinho / obs: falta completar o readme, mas o código esta todo comentado 
 
-* Tenha o git instalado em sua maquina
-* Tenha o node intalado em sua maquina
+* Para fazer esse projeto precia ter o node e o git instalado
+
 
 * Crie uma pasta chamada crud-api-anotação
 * Abra a pasta no terminal e Inicialize o projeto utilizando o comando ```npm init -y```
